@@ -34,33 +34,40 @@ export default function Page() {
   };
 
 
-  const handleBack = () => {
-    const subStepsPerStep: Record<number, number> = {
-      2: hairHealthQuestions.length,
-      3: internalHealthQuestions.length,
-    // 4: scalpQuestions.length, // Uncomment if using step 4
-    };
-  
-    if (subStep > 1) {
-      prevSubStep();
-    } else if (currentStep > 1) {
-      prevStep();
-  
-      // Wait for state update before setting subStep
-      const previousStep = currentStep - 1;
-      const lastSub = subStepsPerStep[previousStep] ?? 1;
-  
-      setTimeout(() => {
-        setSubStep(lastSub);
-      }, 0); // Ensure this runs after prevStep state updates
-    }
+ const handleBack = () => {
+  const { currentStep, subStep, prevSubStep, prevStep, setSubStep } = useFormStore.getState();
+
+  // Define sub-steps for each step
+  const subStepsPerStep: Record<number, number> = {
+    2: hairHealthQuestions.length,
+    3: internalHealthQuestions.length,
   };
+
+  // Case 1: Inside sub-steps, go back within sub-step
+  if (subStepsPerStep[currentStep] && subStep > 1) {
+    prevSubStep();
+    return;
+  }
+
+  // Case 2: Go to previous step
+  if (currentStep > 1) {
+    const previousStep = currentStep - 1;
+    const lastSubStep = subStepsPerStep[previousStep] || 1;
+
+    prevStep();
+
+    // Delay setting subStep to ensure prevStep updates first
+    setTimeout(() => {
+      setSubStep(lastSubStep);
+    }, 0);
+  }
+};
 
 
   return (
     <main className="min-h-screen bg-gray-100 grid grid-rows-[auto_1fr] h-screen overflow-hidden">
       <Header name={formData.name} />
-      <div className="max-w-2xl mx-auto bg-white shadow-md p-5 overflow-auto space-y-6 md:rounded-lg md:mb-6 md:p-10">
+      <div className="w-full max-w-2xl mx-auto bg-white shadow-md p-5 overflow-auto space-y-6 md:rounded-lg md:mb-6 md:p-10">
       
         <FormWrapper title={currentStep !== 5 ? "Hair Assessment Form" : ""} description={currentStep !== 5 ? "A quick 4-step form to understand and evaluate your hair and scalp health.": ""}>
         {currentStep !== 5 && (
