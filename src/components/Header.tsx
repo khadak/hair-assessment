@@ -16,7 +16,9 @@ const Header: React.FC<HeaderProps> = ({name}) => {
         <>
         <header className="w-full py-4 px-6 bg-secondary shadow-sm flex justify-between items-center md:mb-6 max-md:py-3">
             <div>
-                <Image width={120} height={40}  alt="Traya" src="/images/traya-logo.webp" className="max-md:h-6 max-md:w-auto" />
+                <a href="https://traya.health/">
+                    <Image width={120} height={40}  alt="Traya" src="/images/traya-logo.webp" className="max-md:h-6 max-md:w-auto" />
+                </a>
                 <h1 className="text-xl font-semibold text-white max-md:text-base">
                     {name ? `Hi, ${name} 👋` : 'Welcome to Hair Assessment'}
                 </h1>
