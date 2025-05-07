@@ -1,103 +1,87 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React from 'react';
+import { useFormStore } from '@/store/formStore';
+import Step1AboutYou from '@/steps/Step1AboutYou';
+import FormWrapper from '@/components/FormWrapper';
+import Header from '@/components/Header';
+import StepHeader from '@/steps/StepHeader';
+import Step2HairHealth from '@/steps/Step2HairHealth';
+import Step3InternalHealth from '@/steps/Step3InternalHealth';
+import Step4ScalpAssessment from '@/steps/Step4ScalpAssessment';
+import SuccesScreen from '@/steps/SuccessScreen'
+import { hairHealthQuestions, internalHealthQuestions } from "@/data/QuestionsData";
+
+
+
+export default function Page() {
+  const { currentStep, formData, prevStep, subStep, prevSubStep, setSubStep  } = useFormStore();
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <Step1AboutYou />;
+      case 2:
+        return <Step2HairHealth />; 
+      case 3:
+          return <Step3InternalHealth />;
+      case 4:
+          return <Step4ScalpAssessment />;
+      case 5: 
+          return <SuccesScreen />;    
+      default:
+        return null;
+    }
+  };
+
+
+  const handleBack = () => {
+    const subStepsPerStep: Record<number, number> = {
+      2: hairHealthQuestions.length,
+      3: internalHealthQuestions.length,
+    // 4: scalpQuestions.length, // Uncomment if using step 4
+    };
+  
+    if (subStep > 1) {
+      prevSubStep();
+    } else if (currentStep > 1) {
+      prevStep();
+  
+      // Wait for state update before setting subStep
+      const previousStep = currentStep - 1;
+      const lastSub = subStepsPerStep[previousStep] ?? 1;
+  
+      setTimeout(() => {
+        setSubStep(lastSub);
+      }, 0); // Ensure this runs after prevStep state updates
+    }
+  };
+
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-screen bg-gray-100 grid grid-rows-[auto_1fr] h-screen overflow-hidden">
+      <Header name={formData.name} />
+      <div className="max-w-2xl mx-auto bg-white shadow-md p-5 overflow-auto space-y-6 md:rounded-lg md:mb-6 md:p-10">
+      
+        <FormWrapper title={currentStep !== 5 ? "Hair Assessment Form" : ""} description={currentStep !== 5 ? "A quick 4-step form to understand and evaluate your hair and scalp health.": ""}>
+        {currentStep !== 5 && (
+          <StepHeader currentStep={currentStep}  steps={["About You", "Hair Health", "Internal Health", "Scalp Assessment"]} />
+        )}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          {renderStep()}
+
+           
+        {currentStep > 1 && currentStep !== 5 && (
+            <button
+              onClick={handleBack}
+              className="text-sm text-blue-600 cursor-pointer hover:underline"
+            >
+              ← Back
+            </button>
+          )}
+          
+        </FormWrapper>
+      
+      </div>
+    </main>
   );
 }

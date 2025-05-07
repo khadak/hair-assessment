@@ -1,0 +1,14 @@
+@keyframes smoothNoise {
+    0% { background-position: 0 0; opacity: 0.9; }
+    25% { background-position: 20% 10%; opacity: 0.8; }
+    50% { background-position: 40% 30%; opacity: 0.85; }
+    75% { background-position: 10% 50%; opacity: 0.9; }
+    100% { background-position: 0 0; opacity: 0.95; }
+  }
+
+  .tv-noise {
+    background-image: repeating-radial-gradient(circle, #222 0px, #444 1px, transparent 1px, transparent 2px);
+    background-size: 3px 3px;
+    animation: smoothNoise 3s linear infinite;
+    filter: brightness(1.2) contrast(1.5);
+  }
