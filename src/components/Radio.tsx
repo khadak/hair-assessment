@@ -8,8 +8,8 @@ import { RadioProps } from "@/types/type";
 const Radio: React.FC<RadioProps> = ({label, name, options, value, error, onChange, style, className, imgWidth, imgHeigth, labelPaddingY="py-4", labelUppercase}) => {
     return(
         <div className="mb-4">
-            <div className="block text-lg text-gray-700 font-bold mb-4">{label}</div>
-            <div className={`flex flex-wrap gap-4 ${className}`}>
+            <div className="block text-lg text-gray-700 font-bold mb-4 max-md:mb-2 max-md:text-base">{label}</div>
+            <div className={`flex flex-wrap gap-4 max-md:gap-3 ${className}`}>
                 {options.map((options, index) => {
                     
                     const isSelected = value === options.label;
@@ -19,7 +19,7 @@ const Radio: React.FC<RadioProps> = ({label, name, options, value, error, onChan
                         <label
                             key={`${options.label}-${index}`}
                             style={style}
-                            className={`${labelPaddingY} ${labelUppercase ? 'uppercase' : ''} cursor-pointer flex justify-between items-center border border-secondary rounded-lg px-4  text-base font-medium min-w-[80px] text-center transition-all duration-200 hover:scale-[1.04] 
+                            className={`${labelPaddingY} ${labelUppercase ? 'uppercase' : ''} max-md:py-3 max-md:px-2 cursor-pointer flex justify-between items-center border border-secondary rounded-lg px-4  text-base max-md:text-sm font-medium min-w-[80px] text-center transition-all duration-200 hover:scale-[1.04] 
                                 ${isSelected ? 'bg-secondary text-white border-secondary' : 'bg-white text-gray-700 border-gray-300 hover:border-primary'}`}
                             >
                             <input
@@ -44,7 +44,7 @@ const Radio: React.FC<RadioProps> = ({label, name, options, value, error, onChan
                             />
                             {options.label}
                             {optionIcon && optionIcon?.length != 0  && (
-                                <div className="flex justify-center gap-4 p-2 ml-3 rounded-sm bg-gray-100">
+                                <div className="flex justify-center gap-4 p-2 ml-3 max-md:ml-2 rounded-sm bg-gray-100">
                                     {optionIcon.map((src, iconIndex) => (
                                         <Image
                                         key={iconIndex}

@@ -1,9 +1,6 @@
 @layer utilities {
     @media (max-width: 767px) {
       .step-container {
-        &:nth-child(odd) > div > div:nth-child(2) {
-          top: 40px;
-        }
   
         &:last-child {
           > div > div {

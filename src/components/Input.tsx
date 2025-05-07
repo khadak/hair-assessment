@@ -6,7 +6,7 @@ import { InputProps } from "@/types/type";
 
 const Input: React.FC<InputProps> = ({id, name, label, value, placeholder, type ="text", error, onChange, onBlur, style}) => {
     return(
-        <div className="relative mb-6">
+        <div className="relative mb-6 max-md:mmb-5">
             <input
                 id={id}
                 name={name}
@@ -15,7 +15,7 @@ const Input: React.FC<InputProps> = ({id, name, label, value, placeholder, type 
                 placeholder={placeholder}
                 onChange={onChange}
                 onBlur={onBlur}
-                className={`peer p-4 block w-full bg-gray-100 border-transparent rounded-lg sm:text-sm placeholder:text-transparent focus:border-secondary outline-secondary focus-visible:ring-secondary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600
+                className={`peer p-4 max-md:p-3 block w-full bg-gray-100 border-transparent rounded-lg sm:text-sm placeholder:text-transparent focus:border-secondary outline-secondary focus-visible:ring-secondary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600
                             focus:pt-6
                             focus:pb-2
                             not-placeholder-shown:pt-6

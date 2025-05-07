@@ -45,7 +45,7 @@ const Step3InternalHealth = () => {
                     options = {current.options}
                     value= {currentValue}
                     onChange = {handleChange}
-                    className={`grid grid-cols-2 gap-4`}
+                    className={`grid gap-4 min-md:grid-cols-2`}
                     />
                 </motion.div>
             </AnimatePresence>

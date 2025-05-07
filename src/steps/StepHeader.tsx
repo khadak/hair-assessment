@@ -19,13 +19,13 @@ const StepHeader: React.FC<StepHeaderProps> = ({ currentStep, steps }) => {
           <div key={label} className="flex-1 flex items-center step-container">
             <div className="flex flex-col items-center text-center w-full relative">
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-sm z-10 transition delay-150 duration-300 md:w-12 md:h-12
+                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm z-10 transition delay-150 duration-300 md:w-12 md:h-12
                     ${isCompleted ? "bg-green-500" : isActive ? "bg-primary transform: scale-125" : "bg-secondary text-gray-700"}
                     }`}
               >
                 {stepNumber}
               </div>
-              <div className={`relative pt-1  ${isActive ? "transform scale-125 top-2 max-md:block max-md:absolute max-md:top-[40]" : "max-md:hidden"}`}>
+              <div className={`relative pt-1  ${isActive ? "transform scale-125 top-2 max-md:block max-md:absolute max-md:top-[48]" : "max-md:hidden"}`}>
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent transition delay-150 duration-300
                   ${isCompleted? "border-b-green-500" : isActive ? "border-b-primary" : "border-b-secondary"}`
                 }
