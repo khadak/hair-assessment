@@ -15,7 +15,7 @@ import { hairHealthQuestions, internalHealthQuestions } from "@/data/QuestionsDa
 
 
 export default function Page() {
-  const { currentStep, formData, prevStep, subStep, prevSubStep, setSubStep  } = useFormStore();
+  const { currentStep, formData } = useFormStore();
   const renderStep = () => {
     switch (currentStep) {
       case 1:
@@ -68,7 +68,6 @@ export default function Page() {
     <main className="min-h-screen bg-gray-100 grid grid-rows-[auto_1fr] h-screen overflow-hidden">
       <Header name={formData.name} />
       <div className="w-full max-w-2xl mx-auto bg-white shadow-md p-5 overflow-auto space-y-6 md:rounded-lg md:mb-6 md:p-10">
-       
         <FormWrapper title={currentStep !== 5 ? "Hair Assessment Form" : ""} description={currentStep !== 5 ? "A quick 4-step form to understand and evaluate your hair and scalp health.": ""}>
         {currentStep !== 5 && (
           <StepHeader currentStep={currentStep}  steps={["About You", "Hair Health", "Internal Health", "Scalp Assessment"]} />
