@@ -97,6 +97,7 @@ export type InputProps = {
     required?: boolean;
     type?: string;
     error?: string;
+    maxLength?: number;
     onChange:(e: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur?:(e: React.ChangeEvent<HTMLInputElement>) => void;
     style?: React.CSSProperties;

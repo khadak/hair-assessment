@@ -49,6 +49,7 @@ const Step1AboutYou = () => {
           onChange={handleChange}
           placeholder="Enter your name"
           error={errors.name}
+          maxLength={51}
           />
           <div className="flex mb-0 md:flex-row gap-4">
             <div className="flex-1">
@@ -59,7 +60,8 @@ const Step1AboutYou = () => {
                 value={formData.phone} 
                 placeholder="Enter your Mobile Number"
                 error={errors.phone}
-                onChange={handleChange} 
+                maxLength={11}
+                onChange={handleChange}
                 />
             </div>
               <Input
