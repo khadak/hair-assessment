@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({name}) => {
                     <Image width={120} height={40}  alt="Traya" src="/images/traya-logo.webp" className="max-md:h-6 max-md:w-auto" />
                 </a>
                 <h1 className="text-xl font-semibold text-white max-md:text-base">
-                    {name ? `Hi, ${name} 👋` : 'Welcome to Hair Assessment'}
+                    {name ? `Hello, ${name} 👋` : 'Welcome to Hair Assessment'}
                 </h1>
             </div>
             {isSubmitted && <LogoutButton />}
